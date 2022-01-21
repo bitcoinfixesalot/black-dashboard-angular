@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ROUTES } from '../../components/sidebar/sidebar.component';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-auth-layout',
@@ -12,13 +12,15 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
   public menuItems: any[];
   test: Date = new Date();
   closeResult: string;
-  public sidebarColor: string = "red";
+  public sidebarColor = 'red';
   public isCollapsed = true;
   mobile_menu_visible: any = 0;
   private toggleButton: any;
   private sidebarVisible: boolean;
 
-  constructor(private router: Router, private modalService: NgbModal) { }
+  constructor(private router: Router,  private modalService: NgbModal) {
+
+  }
 
   changeSidebarColor(color){
     var sidebar = document.getElementsByClassName('sidebar')[0];
@@ -26,10 +28,10 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
 
     this.sidebarColor = color;
 
-    if(sidebar != undefined){
+    if(sidebar !== undefined){
         sidebar.setAttribute('data',color);
     }
-    if(mainPanel != undefined){
+    if(mainPanel !== undefined){
         mainPanel.setAttribute('data',color);
     }
   }
@@ -44,7 +46,7 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
   }
   // function that adds color white/transparent to the navbar on resize (this is for the collapse)
    updateColor = () => {
-   var navbar = document.getElementsByClassName('navbar')[0];
+   const navbar = document.getElementsByClassName('navbar')[0];
      if (window.innerWidth < 993 && !this.isCollapsed) {
        navbar.classList.add('bg-white');
        navbar.classList.remove('navbar-transparent');
@@ -54,13 +56,13 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
      }
    };
   ngOnInit() {
-    var navbar = document.getElementsByClassName('navbar')[0];
+    const navbar = document.getElementsByClassName('navbar')[0];
 
-    window.addEventListener("resize", this.updateColor);
-    this.toggleButton = navbar.getElementsByClassName("navbar-toggler")[0];
+    window.addEventListener('resize', this.updateColor);
+    this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
     this.router.events.subscribe(event => {
       this.sidebarClose();
-      var $layer: any = document.getElementsByClassName("close-layer")[0];
+      const $layer: any = document.getElementsByClassName('close-layer')[0];
       if ($layer) {
         $layer.remove();
         this.mobile_menu_visible = 0;
